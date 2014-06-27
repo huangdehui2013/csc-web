@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/freemarker/decorators">
+	<excludes>
+		<pattern>/css/*</pattern>
+		<pattern>/img/*</pattern>
+		<pattern>/js/*</pattern>
+		<pattern>/content/*</pattern>
+		<pattern>/user/login.htm*</pattern>
+		<pattern>/order/queryOrdersForSQL.htm*</pattern>
+		<pattern>/bootstrap/loadTable.htm*</pattern>
+	</excludes>
+
+	
+	<decorator name="main" page="ui_main.html">
+		<pattern>/**.htm*</pattern>
+	</decorator>
+</decorators>
+

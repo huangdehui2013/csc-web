@@ -1,0 +1,26 @@
+<div class="page-sidebar navbar-collapse collapse">
+	<ul class="page-sidebar-menu">
+		<li>
+			<div class="sidebar-toggler hidden-phone"></div>
+		</li>
+		<li class="start <#if requestURI==(base+'/index.htm') || requestURI==base+'/'>active</#if>">
+			<a href="${request.contextPath}/index.htm"> <i class="icon-home"></i> <span class="title">首页</span> <#if requestURI==(base+'/index.htm')><span class="selected"></span></#if> </a>
+		</li>
+		<li <#if requestURI==(base+'/adv/list.htm')>class="active"</#if>>
+			<a href="javascript:;"> <i class="icon-leaf"></i> <span class="title">广告管理</span> <span class="selected"></span> <span class="arrow"></span> </a>
+			<ul class="sub-menu">
+				<li <#if requestURI==(base+'/adv/list.htm')>class="active"</#if>>
+					<a href="${base}/adv/list.htm">平台广告管理</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	$(function() {
+		//选中当前菜单
+		$(".sub-menu .active").parent().parent().addClass("active").parent().parent().addClass("active");
+		$('.sub-menu .active').find('span.arrow').addClass('open');
+	});
+
+</script>

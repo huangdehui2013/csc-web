@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:p="http://cxf.apache.org/policy" xmlns:ss="http://www.springframework.org/schema/security"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+   	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd 
+   	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd 
+   	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+   	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+   	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+   	http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd 
+   	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+   	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+   	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+   	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<import resource="classpath:conf/applicationContext-venus-placeholder.xml" />
+	<import resource="classpath:conf/spring/spring-service.xml" />
+	<import resource="classpath:conf/spring/spring-venus.xml" />
+	<import resource="classpath:conf/spring/spring-mq.xml" />
+	<import resource="classpath:redis/scl-redis-client.xml" />
+	<!-- mas服务 -->
+	<import resource="classpath*:conf/spring/saic-mas-dal.xml" />
+	<import resource="classpath*:conf/spring/saic-mas-ds.xml" />
+	
+	<!-- 
+	<mvc:interceptors>
+        <bean class="com.saic.csc.web.interceptor.SecurityInterceptor" />
+    </mvc:interceptors>
+ -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+
+	
+	<!--===================== view resovler ===================== -->
+	<bean id="viewResolver" abstract="true">
+		<property name="attributes">
+			<props>
+				<prop key="imgHost">${ebiz.csc.imgHost}</prop>
+				<prop key="envName">${ebiz.csc.envName}</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="jstlViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		parent="viewResolver">
+		<property name="order" value="2" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+	</bean>
+	<bean id="freemarkerResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+		parent="viewResolver">
+		<property name="cache" value="false" />
+		<property name="order" value="1" />
+		<property name="viewNames">
+			<array>
+				<value>*.ftl</value>
+				<value>*.html</value>
+			</array>
+		</property>
+		<!-- <property name="suffix" value=".html" /> -->
+		<property name="requestContextAttribute" value="request" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="allowSessionOverride" value="true" />
+		<property name="contentType" value="text/html;charset=utf-8" /><!--编码 -->
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+	</bean>
+	<!-- ===================== view resolver end ====================== -->
+	<!-- 文件上传支持 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize">
+			<value>${ebiz.csc.upload.maxUploadSize}</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>${ebiz.csc.upload.maxInMemorySize}</value>
+		</property>
+	</bean>
+
+	<!-- 类型转换支持 -->
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.saic.csc.web.converter.StringDateConverter" />
+				<bean class="com.saic.csc.web.converter.DateStringConverter" />
+				<bean class="com.saic.csc.web.converter.StringTimestampConverter" />
+				<bean class="com.saic.csc.web.converter.TimestampStringConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<description>Required for Freemarker to work in web tier</description>
+		<property name="configuration" ref="freemarkerConfiguration" />
+	</bean>
+
+	<bean id="freemarkerConfiguration"
+		class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+		<!-- 模板加载路径 -->
+		<property name="templateLoaderPaths">
+			<list>
+				<value>/WEB-INF/html/</value>
+				<value>/WEB-INF/freemarker/</value>
+				<value>classpath:/saic_macro/</value>
+			</list>
+		</property>
+		<property name="configLocation">
+			<value>classpath:conf/freemarker.properties</value>
+		</property>
+		<!--全局变量部分 -->
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+				<entry key="html_escape" value-ref="fmHtmlEscape" />
+				<entry key="cmsPath" value="${ebiz.csc.cmsPath}" />
+				<entry key="msDomain" value="${ebiz.csc.msDomain}" />
+			</map>
+		</property>
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+	<bean id="fmHtmlEscape" class="freemarker.template.utility.HtmlEscape" />
+
+
+
+	<!-- ====================== i18n =============================== -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:i18n/messages" />
+	</bean>
+
+
+	<bean name="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource">
+			<ref bean="messageSource" />
+		</property>
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+
+</beans>

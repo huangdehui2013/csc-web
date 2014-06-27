@@ -1,0 +1,32 @@
+<input type="hidden" id="cscBasePath" value="${request.contextPath}" />
+<div class="header navbar navbar-inverse navbar-fixed-top">
+	<div class="header-inner">
+		<a class="navbar-brand text-center"  href="${request.contextPath}/index.htm"><strong style="font-size:20px;color:#fff;font-family: 'Microsoft YaHei';">上汽电商运营平台
+</strong></a>
+		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <img src="${request.contextPath}/assets/img/menu-toggler.png" alt="" /> </a>
+		<ul class="nav navbar-nav pull-right">
+			<li class="dropdown user">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> 
+					<img alt="" src="${request.contextPath}/assets/img/avatar1_small.jpg"/> <span class="username"><#if user?exists>${user.name}</#if></span> 
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a onclick="updatePasswordDaliog()"><i></i>修改密码</a>
+					</li>
+					<li>
+						<a href="${request.contextPath}/logout.htm"><i class="icon-user"></i>退出</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="modal fade" id="updatePasswordModal" tabindex="-1" role="basic" aria-hidden="true">
+<img src="${request.contextPath}/assets/img/ajax-modal-loading.gif" alt=""	class="loading"/>
+</div>
+<script type="text/javascript" src="${request.contextPath}/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/scripts/csc/commonFormValidator.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/scripts/csc/commonFormValidator.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/scripts/repassword.js"></script>

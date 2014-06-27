@@ -1,0 +1,52 @@
+
+/* 淇浣跨敤uniform鎻掍欢鍚巌nput[type="radio"]鏃犳硶閫変腑 begin */
+.radio input[type="radio"]{margin-left: 0;}
+/* 淇浣跨敤uniform鎻掍欢鍚巌nput[type="radio"]鏃犳硶閫変腑 end */
+
+/* 鍥剧墖绠＄悊绫诲叕鐢�begin */
+.imgage-box .thumbnail{position: relative; }
+.imgage-box .caption input[type='text']{border:1px solid #e5e5e5; }
+.imgage-box .caption input[type='text']:focus{border-color: #999999; outline: 0; -webkit-box-shadow: none !important; box-shadow: none !important; }
+.imgage-box .checker{position: absolute; top:10px; left: 10px;}
+.thumbnail >a >img{max-width: 100%;}
+.image-box-fixed-height .caption{height:170px; }
+.image-box-fixed-height .control-buttons{padding:0 9px 9px;}
+/* 鍥剧墖绠＄悊绫诲叕鐢�end */
+
+/* 鏂囦欢涓婁紶涓樉绀烘枃浠跺悕杈撳叆妗嗭紙瀹為檯鏄敤span妯℃嫙鐨勶級begin */
+.fileupload .uneditable-input{max-width: 180px;overflow: hidden;}
+/* 鏂囦欢涓婁紶涓樉绀烘枃浠跺悕杈撳叆妗嗭紙瀹為檯鏄敤span妯℃嫙鐨勶級end */
+
+/* cxxxgl-image-management.html 杞﹀瀷淇℃伅绠＄悊>鍥剧墖绠＄悊 begin */
+#model-images .imgage-box{margin-top: 10px; margin-bottom: 10px;}
+#current-model-info{margin-bottom: 20px; font-size: 14px;}
+#btn-upload-image{margin-left: 10px;}
+#operation-result{display: none ;position: absolute; top:100px; left: 45%; }
+/* cxxxgl-image-management.html 杞﹀瀷淇℃伅绠＄悊>鍥剧墖绠＄悊 end */
+
+/* jxsgl.html 缁忛攢鍟嗙鐞�begin */
+#primary-search-conditions{margin-bottom: 10px;}
+/* jxsgl.html 缁忛攢鍟嗙鐞�end */
+
+/* jxsgl-sales-consultant-management.html 閿�敭椤鹃棶淇℃伅绠＄悊 begin */
+#table-sales-consultant-management th, #table-sales-consultant-management td{vertical-align: middle;}
+#table-sales-consultant-management .staff-name{width:400px; }
+#table-sales-consultant-management .staff-name img{margin-right: 10px;}
+/* jxsgl-sales-consultant-management.html 閿�敭椤鹃棶淇℃伅绠＄悊 end */
+
+
+/* yytg-home-activities-area 棣栭〉娲诲姩涓撳尯 begin */
+.page-yytg-home-activities-area .image-box-fixed-height .caption{height:200px; }
+/* yytg-home-activities-area 棣栭〉娲诲姩涓撳尯 end */
+
+/* yytg-home-dealer-area 棣栭〉缁忛攢鍟嗗尯 begin */
+.page-yytg-home-dealer-area .image-box-fixed-height .caption{height:280px; }
+/* yytg-home-dealer-area 棣栭〉缁忛攢鍟嗗尯 end */
+
+/* yytg-home-fast-buy 蹇�璐溅鍖�begin */
+#fast-buy-config{min-height: 100px;}
+/* yytg-home-fast-buy 蹇�璐溅鍖�end */
+
+/* 浣跨敤datatable鎺т欢骞朵笖浣跨敤.table-responsive-scrollable浣胯〃鏍兼í鍚戞粴鍔ㄦ椂 begin */
+.table-responsive-scrollable.dataTable{margin-top: -1px;}
+/* 浣跨敤datatable鎺т欢骞朵笖浣跨敤.table-responsive-scrollable浣胯〃鏍兼í鍚戞粴鍔ㄦ椂 end */

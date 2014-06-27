@@ -1,0 +1,19 @@
+jQuery.extend(jQuery.validator.messages, {
+    required: "此项为必填项.",
+    remote: "此项有误，请修正.",
+    email: "请输入有效的Email地址.",
+    url: "请输入有效的URL.",
+    date: "请输入有效的日期.",
+    dateISO: "请输入有效的日期(ISO).",
+    number: "请输入有效的数字.",
+    digits: "请输入有效的数字（纯数字，无小数点）.",
+    creditcard: "请输入有效的信用卡号.",
+    equalTo: "请再次输入相同的值.",
+    accept: "请输入带有有效扩展名的值.",
+    maxlength: jQuery.validator.format("该项最大字符长度为{0}."),
+    minlength: jQuery.validator.format("该项最小字符长度为{0}."),
+    rangelength: jQuery.validator.format("请输入字符长度为{0}到{1}的值."),
+    range: jQuery.validator.format("请输入介于{0}和{1}之间的值."),
+    max: jQuery.validator.format("请输入小于或等于{0}的值."),
+    min: jQuery.validator.format("请输入大于或等于{0}的值.")
+});
